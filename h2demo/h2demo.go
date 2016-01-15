@@ -12,9 +12,6 @@ import (
 	"crypto/tls"
 	"flag"
 	"fmt"
-	"github.com/brk0v/http2"
-	"github.com/camlistore/camlistore/pkg/googlestorage"
-	"go4.org/syncutil/singleflight"
 	"hash/crc32"
 	"image"
 	"image/jpeg"
@@ -31,6 +28,10 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/rmohid/http2-pp"
+	"github.com/camlistore/camlistore/pkg/googlestorage"
+	"go4.org/syncutil/singleflight"
 )
 
 var (
@@ -241,7 +242,7 @@ func simplePrefetchHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "<link rel=\"prefetch\"  href=\"/file/%s\" as=\"image\">\n", k)
 		}
 	}
-	fmt.Fprintf(w, "<a href=\"/simple_show\"><h3>Show pushed resources</h3></a>\n")
+	fmt.Fprintf(w, "<a href=\"/simple_show\"><h3>Show prefetched resources</h3></a>\n")
 	fmt.Fprintf(w, "</body></html>\n")
 }
 
